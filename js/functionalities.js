@@ -1,3 +1,4 @@
+// functions
 function getInputFieldValueByID(inputFieldID){
     const inputField = document.getElementById(inputFieldID);
     const inputFieldValueString = inputField.value;
@@ -18,26 +19,36 @@ function setTextElementValueByID(elementID, elementValue){
     element.innerText = elementValue;
 }
 
+// deposite button
 document.getElementById("btn-deposite").addEventListener('click', function(){
     const prevDepositeAmount = getElementValueByID("deposite-total");
     const newDepositeAmount = getInputFieldValueByID("deposite-field");
     const newDepositeTotal = prevDepositeAmount + newDepositeAmount;
+    if(isNaN(newDepositeAmount) || newDepositeAmount === ''){
+        alert("Please provide a valid number!");
+        return;
+    }
     setTextElementValueByID("deposite-total", newDepositeTotal);
 
     const prevBalanceAmount = getElementValueByID("balance-total");
     const newBalanceTotal = prevBalanceAmount + newDepositeAmount;
     setTextElementValueByID("balance-total", newBalanceTotal);
+
 });
 
-// withdraw
+// withdraw button
 
 document.getElementById("btn-withdraw").addEventListener('click', function(){
     const prevWithrawAmount = getElementValueByID("withdraw-total");
     const newWithdrawAmount = getInputFieldValueByID("withdraw-field");
     const newWithdrawTotal = prevWithrawAmount + newWithdrawAmount;
-    setTextElementValueByID("withdraw-total", newWithdrawTotal);
-
+    
     const prevBalanceAmount = getElementValueByID("balance-total");
     const newBalanceTotal = prevBalanceAmount - newWithdrawAmount;
+    if(newWithdrawAmount > prevBalanceAmount){
+        alert("Baap er bank e eto taka nai");
+        return;
+    }
+    setTextElementValueByID("withdraw-total", newWithdrawTotal);
     setTextElementValueByID("balance-total", newBalanceTotal);
 });
