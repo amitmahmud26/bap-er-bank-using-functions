@@ -45,6 +45,10 @@ document.getElementById("btn-withdraw").addEventListener('click', function(){
     
     const prevBalanceAmount = getElementValueByID("balance-total");
     const newBalanceTotal = prevBalanceAmount - newWithdrawAmount;
+    if(isNaN(newWithdrawAmount) || newWithdrawAmount === ''){
+        alert("Please provide a valid number!");
+        return;
+    }
     if(newWithdrawAmount > prevBalanceAmount){
         alert("Baap er bank e eto taka nai");
         return;
